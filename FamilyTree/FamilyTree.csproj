@@ -7,7 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Models" />
+      <Folder Include="Migrations" />
       <Folder Include="wwwroot\css" />
       <Folder Include="wwwroot\js" />
       <Folder Include="wwwroot\lib" />
@@ -15,6 +15,11 @@
 
     <ItemGroup>
       <PackageReference Include="bootstrap" Version="5.2.0-beta1" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.0-preview.6.22329.4">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
+      <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.0-preview.6" />
     </ItemGroup>
 
 </Project>
