@@ -5,6 +5,7 @@ namespace FamilyTree.Models;
 public class PersonContext : DbContext
 {
     public virtual DbSet<Person> Persons { get; set; }
+    public virtual DbSet<Description> Descriptions { get; set; }
 
     public PersonContext()
     {
@@ -19,7 +20,7 @@ public class PersonContext : DbContext
     {
         if (!optionsBuilder.IsConfigured)
         {
-            optionsBuilder.UseNpgsql("Server=localhost;port=5432;Database=Persons;User Id=postgres;Password=postgres;");
+            optionsBuilder.UseNpgsql();
         }
     }
 }
