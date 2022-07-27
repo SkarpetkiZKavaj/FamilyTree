@@ -8,6 +8,13 @@
 
     <ItemGroup>
       <Folder Include="Models" />
+      <Folder Include="wwwroot\css" />
+      <Folder Include="wwwroot\js" />
+      <Folder Include="wwwroot\lib" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="bootstrap" Version="5.2.0-beta1" />
     </ItemGroup>
 
 </Project>
