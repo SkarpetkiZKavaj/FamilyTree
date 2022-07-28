@@ -7,19 +7,34 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FamilyTree.Migrations
 {
     /// <inheritdoc />
-    public partial class AddDescription : Migration
+    public partial class initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Persons",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    FirstName = table.Column<string>(type: "text", nullable: true),
+                    LastName = table.Column<string>(type: "text", nullable: true),
+                    Age = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Persons", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Descriptions",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Photo = table.Column<byte[]>(type: "bytea", nullable: false),
-                    History = table.Column<string>(type: "text", nullable: false),
+                    Photo = table.Column<byte[]>(type: "bytea", nullable: true),
+                    History = table.Column<string>(type: "text", nullable: true),
                     PersonId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
@@ -45,6 +60,9 @@ namespace FamilyTree.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Descriptions");
+
+            migrationBuilder.DropTable(
+                name: "Persons");
         }
     }
 }

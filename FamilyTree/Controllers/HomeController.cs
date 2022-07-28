@@ -7,10 +7,7 @@ public class HomeController : Controller
 {
     private PersonContext db;
 
-    public HomeController(PersonContext context)
-    {
-        db = context;
-    }
+    public HomeController(PersonContext context) => db = context;
 
     [HttpGet]
     public IActionResult Index()
@@ -21,7 +18,11 @@ public class HomeController : Controller
     [HttpPost]
     public IActionResult AddPerson(Person person)
     {
+        Description desc = new Description();
+        person.Description = desc;
+        desc.Person = person;
         db.Persons.Add(person);
+        db.Descriptions.Add(desc);
         db.SaveChanges();
 
         return RedirectToAction("Index");

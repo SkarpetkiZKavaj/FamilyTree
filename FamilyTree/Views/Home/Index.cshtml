@@ -42,6 +42,7 @@
                 <td>@person.FirstName</td>
                 <td>@person.LastName</td>
                 <td>@person.Age</td>
+                <td>@Html.ActionLink("Description","Index", "Description", new {personId = person.Id})</td>
               </tr>
             }
             </tbody>

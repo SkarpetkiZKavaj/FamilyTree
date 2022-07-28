@@ -20,7 +20,7 @@ public class PersonContext : DbContext
     {
         if (!optionsBuilder.IsConfigured)
         {
-            optionsBuilder.UseNpgsql();
+            optionsBuilder.UseNpgsql("Server=localhost;port=5432;Database=Persons;User Id=postgres;Password=postgres;");
         }
     }
 }

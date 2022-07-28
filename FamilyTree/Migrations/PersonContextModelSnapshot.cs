@@ -31,14 +31,12 @@ namespace FamilyTree.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("History")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<int>("PersonId")
                         .HasColumnType("integer");
 
                     b.Property<byte[]>("Photo")
-                        .IsRequired()
                         .HasColumnType("bytea");
 
                     b.HasKey("Id");
@@ -61,11 +59,9 @@ namespace FamilyTree.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("FirstName")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -86,8 +82,7 @@ namespace FamilyTree.Migrations
 
             modelBuilder.Entity("FamilyTree.Models.Person", b =>
                 {
-                    b.Navigation("Description")
-                        .IsRequired();
+                    b.Navigation("Description");
                 });
 #pragma warning restore 612, 618
         }
