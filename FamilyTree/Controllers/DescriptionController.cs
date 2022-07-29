@@ -17,7 +17,7 @@ public class DescriptionController : Controller
         Person person = persons.Find(p => p.Id == personId);
         return View(person);
     }
-    
+
     [HttpPost]
     public IActionResult AddHistory(int personId, Description description)
     {
@@ -25,7 +25,6 @@ public class DescriptionController : Controller
         Person person = persons.Find(p => p.Id == personId);
         person.Description.History = description.History;
         db.SaveChanges();
-
         return RedirectToAction("Index", new {personId});
     }
 }

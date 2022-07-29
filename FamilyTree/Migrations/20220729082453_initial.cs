@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
@@ -33,7 +32,6 @@ namespace FamilyTree.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Photo = table.Column<byte[]>(type: "bytea", nullable: true),
                     History = table.Column<string>(type: "text", nullable: true),
                     PersonId = table.Column<int>(type: "integer", nullable: false)
                 },
