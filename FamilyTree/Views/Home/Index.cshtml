@@ -1,9 +1,8 @@
 @using System.Reflection.Metadata
-@using FamilyTree.Models
-@model List<FamilyTree.Models.Person>
+@model List<PersonVM>
 
 @{
-    Layout = null;
+    Layout = "_Layout";
 }
 
 <!DOCTYPE html>
@@ -42,6 +41,7 @@
                 <td>@person.FirstName</td>
                 <td>@person.LastName</td>
                 <td>@person.Age</td>
+                <td>@Html.ActionLink("Change","Index", "Description", new {personId = person.Id})</td>
                 <td>@Html.ActionLink("Description","Index", "Description", new {personId = person.Id})</td>
               </tr>
             }

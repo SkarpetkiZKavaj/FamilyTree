@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+</head>
+<body>
+       <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+            <div class="container">
+                <div class="raw">
+                    <div class="col">
+                        
+                    </div>
+                    <div class="col">
+                                            
+                    </div>
+                    <div class="col">
+                                            
+                    </div>
+                    <ul class="nav navbar-nav">
+                        <li><a href="~/Home/Index" class="navbar-brand">Главная</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container body-content">
+            @RenderBody()
+            <hr />
+            <footer>
+               <p>© 2022 - FamilyTree</p>
+            </footer>
+        </div>
+</body>
+</html>

@@ -1,11 +1,16 @@
-using FamilyTree.Models;
+using FamilyTree_BAL.Interfaces;
+using FamilyTree_BAL.Services;
+using FamilyTree_DAL.EF;
+using FamilyTree_DAL.Models;
+using FTEntities.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<PersonContext>(options => options.UseNpgsql("Server=localhost;port=5432;Database=Persons;User Id=postgres;Password=postgres;"));
+builder.Services.AddDbContext<PersonContext>();
+builder.Services.AddScoped<IRepository, PersonRepository>();
+builder.Services.AddScoped<IPersonService, PersonService>();
 
 var app = builder.Build();
 

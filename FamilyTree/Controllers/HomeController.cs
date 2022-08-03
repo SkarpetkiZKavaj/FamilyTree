@@ -1,18 +1,28 @@
+using AutoMapper;
+using FamilyTree_BAL.DTO;
+using FamilyTree_BAL.Interfaces;
+using FamilyTree_DAL.Models;
 using Microsoft.AspNetCore.Mvc;
-using FamilyTree.Models;
 
 namespace FamilyTree.Controllers;
 
 public class HomeController : Controller
 {
-    private PersonContext db;
-
-    public HomeController(PersonContext context) => db = context;
+    private readonly IMapper mapper = new MapperConfiguration(cfg => {
+        cfg.CreateMap<Person, PersonVM>();
+        cfg.CreateMap<Description, DescriptionVM>();
+    }).CreateMapper();
+    
+    private IPersonService service;
+    
+    public HomeController(IPersonService service) => this.service = service;
 
     [HttpGet]
     public IActionResult Index()
     {
-        return View(db.Persons.ToList());
+        var personDTO = service.GetPersons();
+        var persons = mapper.Map<IEnumerable<PersonDTO>, IEnumerable<PersonVM>>(personDTO);
+        return View(persons.ToList());
     }
 
     [HttpPost]
@@ -21,10 +31,10 @@ public class HomeController : Controller
         Description desc = new Description();
         person.Description = desc;
         desc.Person = person;
-        db.Persons.Add(person);
-        db.Descriptions.Add(desc);
-        db.SaveChanges();
 
+        var personDTO = mapper.Map<Person, PersonDTO>(person);
+        service.AddPerson(personDTO);
+        
         return RedirectToAction("Index");
     }
 }
