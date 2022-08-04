@@ -1,11 +1,13 @@
+using System.Reflection;
 using FamilyTree_BAL.Interfaces;
 using FamilyTree_BAL.Services;
 using FamilyTree_DAL.EF;
 using FamilyTree_DAL.Models;
 using FTEntities.Interfaces;
-using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Configuration.AddUserSecrets(Assembly.GetExecutingAssembly(), true);
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<PersonContext>();
