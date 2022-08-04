@@ -9,8 +9,8 @@ namespace FamilyTree.Controllers;
 public class HomeController : Controller
 {
     private readonly IMapper mapper = new MapperConfiguration(cfg => {
-        cfg.CreateMap<Person, PersonVM>();
-        cfg.CreateMap<Description, DescriptionVM>();
+        cfg.CreateMap<PersonDTO, PersonVM>().ReverseMap();
+        cfg.CreateMap<DescriptionDTO, DescriptionVM>().ReverseMap();
     }).CreateMapper();
     
     private IPersonService service;
@@ -26,13 +26,12 @@ public class HomeController : Controller
     }
 
     [HttpPost]
-    public IActionResult AddPerson(Person person)
+    public IActionResult AddPerson(PersonVM person)
     {
-        Description desc = new Description();
+        DescriptionVM desc = new DescriptionVM();
         person.Description = desc;
-        desc.Person = person;
 
-        var personDTO = mapper.Map<Person, PersonDTO>(person);
+        var personDTO = mapper.Map<PersonVM, PersonDTO>(person);
         service.AddPerson(personDTO);
         
         return RedirectToAction("Index");

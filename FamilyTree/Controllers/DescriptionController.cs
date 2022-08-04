@@ -9,8 +9,8 @@ namespace FamilyTree.Controllers;
 public class DescriptionController : Controller
 {
     private readonly IMapper mapper = new MapperConfiguration(cfg => {
-        cfg.CreateMap<Person, PersonVM>();
-        cfg.CreateMap<Description, DescriptionVM>();
+        cfg.CreateMap<PersonDTO, PersonVM>().ReverseMap();
+        cfg.CreateMap<DescriptionDTO, DescriptionVM>().ReverseMap();
     }).CreateMapper();
     
     private IPersonService service;
@@ -29,7 +29,7 @@ public class DescriptionController : Controller
     }
 
     [HttpPost]
-    public IActionResult AddHistory(int personId, Description description)
+    public IActionResult AddHistory(int personId, DescriptionVM description)
     {
         var person = mapper.Map<PersonDTO, PersonVM>(service.GetPerson(personId));
         person.Description.History = description.History;
