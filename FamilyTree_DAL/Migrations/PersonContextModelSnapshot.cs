@@ -40,7 +40,7 @@ namespace FTEntities.Migrations
                     b.HasIndex("PersonId")
                         .IsUnique();
 
-                    b.ToTable("Descriptions");
+                    b.ToTable("Descriptions", (string)null);
                 });
 
             modelBuilder.Entity("FamilyTree_DAL.Models.Person", b =>
@@ -62,7 +62,7 @@ namespace FTEntities.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Persons");
+                    b.ToTable("Persons", (string)null);
                 });
 
             modelBuilder.Entity("FamilyTree_DAL.Models.Description", b =>
