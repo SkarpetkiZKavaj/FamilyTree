@@ -1,7 +1,6 @@
 using AutoMapper;
 using FamilyTree_BAL.DTO;
 using FamilyTree_BAL.Interfaces;
-using FamilyTree_DAL.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FamilyTree.Controllers;
@@ -33,6 +32,13 @@ public class HomeController : Controller
 
         var personDTO = mapper.Map<PersonVM, PersonDTO>(person);
         service.AddPerson(personDTO);
+        
+        return RedirectToAction("Index");
+    }
+
+    public IActionResult Delete(int personId)
+    {
+        service.DeletePerson(personId);
         
         return RedirectToAction("Index");
     }

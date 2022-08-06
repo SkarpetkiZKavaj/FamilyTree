@@ -1,7 +1,6 @@
 using AutoMapper;
 using FamilyTree_BAL.DTO;
 using FamilyTree_BAL.Interfaces;
-using FamilyTree_DAL.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FamilyTree.Controllers;
@@ -29,11 +28,12 @@ public class DescriptionController : Controller
     }
 
     [HttpPost]
-    public IActionResult AddHistory(int personId, DescriptionVM description)
+    public IActionResult ChangeInformation(int personId, int descId, PersonVM person)
     {
-        var person = mapper.Map<PersonDTO, PersonVM>(service.GetPerson(personId));
-        person.Description.History = description.History;
-        service.UpdatePerson(mapper.Map<PersonVM, PersonDTO>(person));
+        var personDTO = mapper.Map<PersonVM, PersonDTO>(person);
+        personDTO.Id = personId;
+        personDTO.Description.Id = descId;
+        service.UpdatePerson(personDTO);
         return RedirectToAction("Index", new {personId});
     }
 }
