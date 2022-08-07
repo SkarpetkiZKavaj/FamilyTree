@@ -1,6 +1,8 @@
 using AutoMapper;
 using FamilyTree_BAL.DTO;
 using FamilyTree_BAL.Interfaces;
+using FTEntities.IdentityModels.User;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FamilyTree.Controllers;
@@ -12,9 +14,22 @@ public class HomeController : Controller
         cfg.CreateMap<DescriptionDTO, DescriptionVM>().ReverseMap();
     }).CreateMapper();
     
+    private readonly SignInManager<User> signInManager;
     private IPersonService service;
     
-    public HomeController(IPersonService service) => this.service = service;
+    public HomeController(IPersonService service, SignInManager<User> signInManager)
+    {
+        this.signInManager = signInManager;
+        this.service = service;
+    }
+
+    [HttpGet]
+    public IActionResult Start()
+    {
+        if (signInManager.IsSignedIn(User))
+            return RedirectToAction("Index");
+        return View();
+    }
 
     [HttpGet]
     public IActionResult Index()

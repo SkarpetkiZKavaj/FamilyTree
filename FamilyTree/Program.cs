@@ -16,18 +16,16 @@ builder.Services.AddDbContext<PersonContext>();
 builder.Services.AddDbContext<IdentityContext>();
 builder.Services.AddScoped<IRepository, PersonRepository>();
 builder.Services.AddScoped<IPersonService, PersonService>();
-builder.Services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<IdentityContext>();
+builder.Services.AddIdentity<User, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false).AddEntityFrameworkStores<IdentityContext>();
 
 var app = builder.Build();
 
-
+app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
-app.UseRouting();
-
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Start}/{id?}");
 
 app.Run();

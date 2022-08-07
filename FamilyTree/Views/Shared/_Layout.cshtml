@@ -1,3 +1,9 @@
+@using FTEntities.IdentityModels.User
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<User> SignInManager
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,12 +17,21 @@
     <a class="navbar-brand px-4" href="~/Home/Index">Home</a>
     <div class="collapse navbar-collapse justify-content-end">
         <ul class="nav ">
-            <li class="nav-item">
-                <a class="btn" href="#" style="background-color: rgba(52, 120, 62, 1);">Sign ip</a>
-            </li>
-            <li class="nav-item px-4">
-                <a class="btn" href="#" style="background-color: rgba(52, 120, 62, 1);">Log in</a>
-            </li>
+            @if (!SignInManager.IsSignedIn(User))
+            {
+                <li class="nav-item">
+                    <a class="btn" href="~/Account/Register" style="background-color: rgba(52, 120, 62, 1);">Sign up</a>
+                </li>
+                <li class="nav-item px-4">
+                    <a class="btn" href="~/Account/Login" style="background-color: rgba(52, 120, 62, 1);">Log in</a>
+                </li>
+            }
+            else
+            {
+                <li class="nav-item px-4">
+                    <a class="btn" href="~/Account/Logout" style="background-color: rgba(52, 120, 62, 1);">Log out</a>
+                </li>
+            }
         </ul>
     </div>
 
