@@ -16,7 +16,7 @@ builder.Services.AddDbContext<PersonContext>();
 builder.Services.AddDbContext<IdentityContext>();
 builder.Services.AddScoped<IRepository, PersonRepository>();
 builder.Services.AddScoped<IPersonService, PersonService>();
-builder.Services.AddIdentity<User, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false).AddEntityFrameworkStores<IdentityContext>();
+builder.Services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<IdentityContext>();
 
 var app = builder.Build();
 
