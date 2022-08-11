@@ -17,6 +17,7 @@ builder.Services.AddDbContext<IdentityContext>();
 builder.Services.AddScoped<IRepository, PersonRepository>();
 builder.Services.AddScoped<IPersonService, PersonService>();
 builder.Services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<IdentityContext>();
+builder.Services.ConfigureApplicationCookie(options => options.LoginPath = "/Account/Login");
 
 var app = builder.Build();
 

@@ -1,10 +1,12 @@
 using AutoMapper;
 using FamilyTree_BAL.DTO;
 using FamilyTree_BAL.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FamilyTree.Controllers;
 
+[Authorize]
 public class DescriptionController : Controller
 {
     private readonly IMapper mapper = new MapperConfiguration(cfg => {
@@ -31,6 +33,7 @@ public class DescriptionController : Controller
     public IActionResult ChangeInformation(int personId, int descId, PersonVM person)
     {
         var personDTO = mapper.Map<PersonVM, PersonDTO>(person);
+
         personDTO.Id = personId;
         personDTO.Description.Id = descId;
         service.UpdatePerson(personDTO);

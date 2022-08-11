@@ -2,11 +2,13 @@ using AutoMapper;
 using FamilyTree_BAL.DTO;
 using FamilyTree_BAL.Interfaces;
 using FTEntities.IdentityModels.User;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FamilyTree.Controllers;
 
+[Authorize]
 public class HomeController : Controller
 {
     private readonly IMapper mapper = new MapperConfiguration(cfg => {
@@ -23,6 +25,7 @@ public class HomeController : Controller
         this.service = service;
     }
 
+    [AllowAnonymous] 
     [HttpGet]
     public IActionResult Start()
     {
@@ -34,6 +37,7 @@ public class HomeController : Controller
     [HttpGet]
     public IActionResult Index()
     {
+        
         var personDTO = service.GetPersons();
         var persons = mapper.Map<IEnumerable<PersonDTO>, IEnumerable<PersonVM>>(personDTO);
         return View(persons.ToList());
@@ -51,6 +55,7 @@ public class HomeController : Controller
         return RedirectToAction("Index");
     }
 
+    [HttpPost]
     public IActionResult Delete(int personId)
     {
         service.DeletePerson(personId);

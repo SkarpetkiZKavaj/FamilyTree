@@ -8,7 +8,10 @@ public class PersonRepository : IRepository
 {
     private PersonContext context;
 
-    public PersonRepository(PersonContext context) => this.context = context;
+    public PersonRepository(PersonContext context)
+    {
+        this.context = context;
+    }
 
     public IEnumerable<Person> GetAll() => context.Persons.Include(p => p.Description).AsNoTracking();
 

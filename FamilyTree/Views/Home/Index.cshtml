@@ -1,3 +1,4 @@
+@using System.Formats.Asn1
 @using System.Reflection.Metadata
 @model List<PersonVM>
 
@@ -41,8 +42,15 @@
                 <td>@person.FirstName</td>
                 <td>@person.LastName</td>
                 <td>@person.Age</td>
-                <td>@Html.ActionLink("Description","Index", "Description", new {personId = person.Id})</td>
-                <td>@Html.ActionLink("Delete","Delete", "Home", new {personId = person.Id})</td>
+                <td>
+                  <td>@Html.ActionLink("Description","Index", "Description", new {personId = person.Id},new { @class = "btn", style="background-color: rgba(52, 120, 62, 1);"})</td>
+                </td>
+                <td>
+                  @using (Html.BeginForm("Delete", "Home",new { personId = person.Id }, FormMethod.Post))
+                  {
+                    <button type="submit" class="btn btn-primary">Delete</button>
+                  }
+                </td>
               </tr>
             }
             </tbody>
