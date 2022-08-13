@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using AutoMapper;
 using FamilyTree_BAL.DTO;
 using FamilyTree_BAL.Interfaces;
@@ -16,11 +17,13 @@ public class HomeController : Controller
         cfg.CreateMap<DescriptionDTO, DescriptionVM>().ReverseMap();
     }).CreateMapper();
     
+    private readonly UserManager<User> userManager;
     private readonly SignInManager<User> signInManager;
     private IPersonService service;
     
-    public HomeController(IPersonService service, SignInManager<User> signInManager)
+    public HomeController(IPersonService service, SignInManager<User> signInManager, UserManager<User> userManager)
     {
+        this.userManager = userManager;
         this.signInManager = signInManager;
         this.service = service;
     }
@@ -37,7 +40,6 @@ public class HomeController : Controller
     [HttpGet]
     public IActionResult Index()
     {
-        
         var personDTO = service.GetPersons();
         var persons = mapper.Map<IEnumerable<PersonDTO>, IEnumerable<PersonVM>>(personDTO);
         return View(persons.ToList());

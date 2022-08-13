@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FTEntities.Migrations.Identity
 {
     [DbContext(typeof(IdentityContext))]
-    [Migration("20220806160604_initial")]
-    partial class initial
+    [Migration("20220813104454_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

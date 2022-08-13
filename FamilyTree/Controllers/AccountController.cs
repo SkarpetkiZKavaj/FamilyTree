@@ -1,7 +1,9 @@
+using System.Security.Claims;
 using FamilyTree.ViewModels;
 using FTEntities.IdentityModels.User;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 
 namespace FamilyTree.Controllers;
 
@@ -28,12 +30,13 @@ public class AccountController : Controller
         User user = new User { Email = model.Email, UserName = model.Email};
 
         var result = await userManager.CreateAsync(user, model.Password);
+        await userManager.AddClaimAsync(user, new Claim("UserId", user.Id));
         if (result.Succeeded)
         {
             await signInManager.SignInAsync(user, false);
             return RedirectToAction("Index", "Home");
         }
-        
+
         return View(model);
     }
     
