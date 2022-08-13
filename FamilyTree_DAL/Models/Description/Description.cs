@@ -6,6 +6,8 @@ public class Description
 {
     public int Id { get; set; }
     
+    public string OwnerId { get; set; }
+    
     [DataType(DataType.Text)] 
     public string? History { get; set; }
 

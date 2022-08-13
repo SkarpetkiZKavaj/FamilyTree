@@ -1,4 +1,5 @@
 using FamilyTree_DAL.Models;
+using FTEntities.Models.Tree;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -8,6 +9,7 @@ public class PersonContext : DbContext
 {
     private IConfiguration configuration;
     public virtual DbSet<Person> Persons { get; set; }
+    public virtual DbSet<Tree> Trees { get; set; }
     public virtual DbSet<Description> Descriptions { get; set; }
 
     public PersonContext()
@@ -23,7 +25,7 @@ public class PersonContext : DbContext
     {
         if (!optionsBuilder.IsConfigured)
         {
-            optionsBuilder.UseNpgsql("Server=localhost;port=5432;Database=Persons;User Id=postgres;Password=postgres;");
+            optionsBuilder.UseNpgsql(configuration["ConnectionString:DefaultConnection"]);
         }
     }
 }
