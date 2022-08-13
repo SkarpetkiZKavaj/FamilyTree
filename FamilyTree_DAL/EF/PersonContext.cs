@@ -23,7 +23,7 @@ public class PersonContext : DbContext
     {
         if (!optionsBuilder.IsConfigured)
         {
-            optionsBuilder.UseNpgsql(configuration["ConnectionString:DefaultConnection"]);
+            optionsBuilder.UseNpgsql("Server=localhost;port=5432;Database=Persons;User Id=postgres;Password=postgres;");
         }
     }
 }

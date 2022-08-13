@@ -1,39 +1,1 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
-
-    <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
-        <Nullable>enable</Nullable>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <AssemblyName>FamilyTree</AssemblyName>
-        <RootNamespace>FamilyTree</RootNamespace>
-        <UserSecretsId>542fcb1a-5544-425c-9fff-8814dd500e3b</UserSecretsId>
-    </PropertyGroup>
-
-    <ItemGroup>
-      <Folder Include="wwwroot\css" />
-      <Folder Include="wwwroot\js" />
-      <Folder Include="wwwroot\lib" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <PackageReference Include="AutoMapper" Version="11.0.1" />
-      <PackageReference Include="bootstrap" Version="5.2.0-beta1" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.0-preview.6.22329.4" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.0-preview.6.22329.4">
-        <PrivateAssets>all</PrivateAssets>
-        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      </PackageReference>
-      <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.0-preview.6.22329.4">
-        <PrivateAssets>all</PrivateAssets>
-        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      </PackageReference>
-      <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="7.0.0-preview.6.22324.4" />
-      <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.0-preview.6" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <ProjectReference Include="..\FamilyTree_BLL\FamilyTree_BLL.csproj" />
-      <ProjectReference Include="..\FamilyTree_DAL\FamilyTree_DAL.csproj" />
-    </ItemGroup>
-
-</Project>
+<Project Sdk="Microsoft.NET.Sdk.Web">    <PropertyGroup>        <TargetFramework>net6.0</TargetFramework>        <Nullable>enable</Nullable>        <ImplicitUsings>enable</ImplicitUsings>        <AssemblyName>FamilyTree</AssemblyName>        <RootNamespace>FamilyTree</RootNamespace>        <UserSecretsId>542fcb1a-5544-425c-9fff-8814dd500e3b</UserSecretsId>    </PropertyGroup>    <ItemGroup>      <Folder Include="wwwroot\css" />      <Folder Include="wwwroot\js" />      <Folder Include="wwwroot\lib" />    </ItemGroup>    <ItemGroup>      <PackageReference Include="AutoMapper" Version="11.0.1" />      <PackageReference Include="bootstrap" Version="5.2.0-beta1" />      <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.0-preview.6.22329.4" />      <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.0-preview.6.22329.4">        <PrivateAssets>all</PrivateAssets>        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>      </PackageReference>      <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.0-preview.6.22329.4">        <PrivateAssets>all</PrivateAssets>        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>      </PackageReference>      <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="7.0.0-preview.6.22324.4" />      <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.0-preview.6" />    </ItemGroup>    <ItemGroup>      <ProjectReference Include="..\FamilyTree_BLL\FamilyTree_BLL.csproj" />      <ProjectReference Include="..\FamilyTree_DAL\FamilyTree_DAL.csproj" />    </ItemGroup></Project>

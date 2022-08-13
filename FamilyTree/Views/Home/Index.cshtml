@@ -1,3 +1,4 @@
+@using System.Formats.Asn1
 @using System.Reflection.Metadata
 @model List<PersonVM>
 
@@ -29,7 +30,7 @@
           <label for="age" class="form-label">Age</label>
           <input type="text" class="form-control" name="Age">
         </div>
-        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="submit" class="btn btn-primary">Add</button>
       }   
       <hr/>
       <table class="table table-condensed table-striped table-bordered">
@@ -41,8 +42,15 @@
                 <td>@person.FirstName</td>
                 <td>@person.LastName</td>
                 <td>@person.Age</td>
-                <td>@Html.ActionLink("Change","Index", "Description", new {personId = person.Id})</td>
-                <td>@Html.ActionLink("Description","Index", "Description", new {personId = person.Id})</td>
+                <td>
+                  <td>@Html.ActionLink("Description","Index", "Description", new {personId = person.Id},new { @class = "btn", style="background-color: rgba(52, 120, 62, 1);"})</td>
+                </td>
+                <td>
+                  @using (Html.BeginForm("Delete", "Home",new { personId = person.Id }, FormMethod.Post))
+                  {
+                    <button type="submit" class="btn btn-primary">Delete</button>
+                  }
+                </td>
               </tr>
             }
             </tbody>
