@@ -7,19 +7,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FamilyTree_DAL.Models;
 
-public class GenericRepository<T> : IDisposable where T : class 
+public class GenericRepository<T> where T : class 
 {
-    private PersonContext context;
     private DbSet<T> dbSet;
     private bool disposed = false;
 
-    public GenericRepository(PersonContext context /*IHttpContextAccessor accessor*/)
-    {
-        
-        this.context = context;
-        dbSet = context.Set<T>();
-        //accessor?.HttpContext?.User?.Claims?.FirstOrDefault(c => c.Type == "UserId")?.Value ;
-    }
+    public GenericRepository(DbSet<T> dbSet) => this.dbSet = dbSet;
+    
     
     public virtual IEnumerable<T> Get(Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, string includeProperties = "")
     {
@@ -38,11 +32,12 @@ public class GenericRepository<T> : IDisposable where T : class
     }
 
     public T GetById(object id) => dbSet.Find(id);
+    
 
     public void Create(T entity) => dbSet.Add(entity);
     
     
-    public void Update(T entity) => context.Update(entity);
+    public void Update(T entity) => dbSet.Update(entity);
     
 
     public void Delete(object id)
@@ -50,20 +45,5 @@ public class GenericRepository<T> : IDisposable where T : class
         T entity = dbSet.Find(id);
         if (entity is not null)
             dbSet.Remove(entity);
-    }
-
-    protected virtual void Dispose(bool disposing)
-    {
-        if (!this.disposed)
-            if (disposing)
-                context.Dispose();
-        
-        this.disposed = true;
-    }
-
-    public void Dispose()
-    {
-        Dispose(true);
-        GC.SuppressFinalize(this);
     }
 }
