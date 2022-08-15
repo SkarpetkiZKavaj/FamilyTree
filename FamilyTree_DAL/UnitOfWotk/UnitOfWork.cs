@@ -1,12 +1,12 @@
 using FamilyTree_DAL.EF;
 using FamilyTree_DAL.Models;
+using FTEntities.Interface;
 using FTEntities.Models.Tree;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
 namespace FTEntities.UnitOfWotk;
 
-public class UnitOfWork : IDisposable
+public class UnitOfWork : IDisposable, IUnitOfWork
 {
     private PersonContext context;
     private string ownerId;
@@ -15,18 +15,15 @@ public class UnitOfWork : IDisposable
     private GenericRepository<Person> personRepository;
     private GenericRepository<Description> descriptionRepository;
 
-    public UnitOfWork(PersonContext context, IHttpContextAccessor accessor)
-    {
-        this.context = context;
-        ownerId = accessor?.HttpContext?.User?.Claims?.FirstOrDefault(c => c.Type == "UserId")?.Value;
-    }
+    public UnitOfWork(PersonContext context) => this.context = context;
+    
 
     public GenericRepository<Tree> TreeRepository
     {
         get
         {
-            if (treeRepository == null)
-                treeRepository = new GenericRepository<Tree>(context.Set<Tree>().Where(t => t.OwnerId == ownerId) as DbSet<Tree>);
+            if (treeRepository is null)
+                treeRepository = new GenericRepository<Tree>(context.Set<Tree>());
  
             return treeRepository;
         }
@@ -36,8 +33,8 @@ public class UnitOfWork : IDisposable
     {
         get
         {
-            if (personRepository == null)
-                personRepository = new GenericRepository<Person>(context.Set<Person>().Where(p => p.OwnerId == ownerId) as DbSet<Person>);
+            if (personRepository is null)
+                personRepository = new GenericRepository<Person>(context.Set<Person>());
             
             return personRepository;
         }
@@ -47,8 +44,8 @@ public class UnitOfWork : IDisposable
     {
         get
         {
-            if (descriptionRepository == null)
-                descriptionRepository = new GenericRepository<Description>(context.Set<Description>().Where(d => d.OwnerId == ownerId) as DbSet<Description>);
+            if (descriptionRepository is null)
+                descriptionRepository = new GenericRepository<Description>(context.Set<Description>());
             
             return descriptionRepository;
         }

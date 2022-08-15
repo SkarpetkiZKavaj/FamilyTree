@@ -1,6 +1,7 @@
 using AutoMapper;
 using FamilyTree_BAL.DTO;
-using FamilyTree_BAL.Interfaces;
+using FamilyTree_BAL.Interface;
+using FamilyTree.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,31 +13,43 @@ public class DescriptionController : Controller
     private readonly IMapper mapper = new MapperConfiguration(cfg => {
         cfg.CreateMap<PersonDTO, PersonVM>().ReverseMap();
         cfg.CreateMap<DescriptionDTO, DescriptionVM>().ReverseMap();
+        cfg.CreateMap<TreeDTO, TreeVM>().ReverseMap();
     }).CreateMapper();
     
-    private IPersonService service;
+    private IServiceHub hub;
+
+    public DescriptionController(IServiceHub hub) => this.hub = hub;
     
-    public DescriptionController(IPersonService service) => this.service = service;
 
     [HttpGet]
     public IActionResult Index(int personId)
     {
-        var person = mapper.Map<PersonDTO, PersonVM>(service.GetPerson(personId));
-
+        var person = mapper.
+            Map<PersonDTO, PersonVM>(hub.PersonService.
+            Get((p => p.Id == personId), null, "Description").
+            FirstOrDefault());
+    
         if (person is null)
             return NotFound();
         
         return View(person);
     }
-
+    
     [HttpPost]
-    public IActionResult ChangeInformation(int personId, int descId, PersonVM person)
+    public IActionResult ChangeInformation(int personId, PersonVM person)
     {
-        var personDTO = mapper.Map<PersonVM, PersonDTO>(person);
+        var personDTO = hub.PersonService.Get((p => p.Id == personId), null, "Description").FirstOrDefault();
 
-        personDTO.Id = personId;
-        personDTO.Description.Id = descId;
-        service.UpdatePerson(personDTO);
+        if (personDTO is null)
+            return NotFound();
+        
+        personDTO.Age = person.Age;
+        personDTO.FirstName = person.FirstName;
+        personDTO.LastName = person.LastName;
+        personDTO.Description.History = person.Description.History;
+        
+        hub.PersonService.Update(personDTO);
+        hub.Save();
         return RedirectToAction("Index", new {personId});
     }
 }
