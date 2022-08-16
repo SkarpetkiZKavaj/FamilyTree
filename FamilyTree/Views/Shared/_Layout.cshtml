@@ -13,41 +13,61 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
 </head>
 <body>
-<nav class="navbar navbar-expand-lg flex-column flex-md-row" style="background-color: rgba(52, 120, 62, 0.25);">
-    <a class="navbar-brand px-4" href="~/Home/Index">Home</a>
+<nav class="navbar navbar-expand-lg flex-column flex-md-row shadow" style="background-color: rgba(208, 193, 172, 0.2);">
+    <a class="navbar-brand px-4" href="~/Home/Index">
+        <h2>Home</h2>
+    </a>
     <div class="collapse navbar-collapse justify-content-end">
         <ul class="nav ">
             @if (!SignInManager.IsSignedIn(User))
             {
                 <li class="nav-item">
-                    <a class="btn" href="~/Account/Register" style="background-color: rgba(52, 120, 62, 1);">Sign up</a>
+                    <a class="btn" href="~/Account/Register" style="background-color: rgba(95, 50, 0, 1); color: rgba(255, 255, 255, 1);">Sign up</a>
                 </li>
                 <li class="nav-item px-4">
-                    <a class="btn" href="~/Account/Login" style="background-color: rgba(52, 120, 62, 1);">Log in</a>
+                    <a class="btn" href="~/Account/Login" style="background-color: rgba(95, 50, 0, 1); color: rgba(255, 255, 255, 1);">Log in</a>
                 </li>
             }
             else
             {
                 <li class="nav-item px-4">
-                    <a class="btn" href="~/Account/Logout" style="background-color: rgba(52, 120, 62, 1);">Log out</a>
+                    <a class="btn" href="~/Account/Logout" style="background-color: rgba(95, 50, 0, 1); color: rgba(255, 255, 255, 1);">Log out</a>
                 </li>
             }
         </ul>
     </div>
-
 </nav>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col">
+
+<div class="container-fluid vh-100" style="background-color: rgba(208, 193, 172, 0.1);">
+    <div class="row align-items-center gx-5">
+        @if (IsSectionDefined("Sidebar"))
+        {
+            <div class="col-2 vh-100" style="background-color: rgba(208, 193, 172, 0.1);">
+                <div class="p-3 shadow vh-100">
+                    @RenderSection("Sidebar")
+                </div>
+            </div>
+            <div class="col-10 vh-100" style="background-color: rgba(208, 193, 172, 0.05);">
+                <div class="p-3 shadow vh-100">
                     @RenderBody()
                 </div>
             </div>
-        </div>
-        <footer class="fixed-bottom">
-            <div class="text-center p-3" style="background-color: rgba(52, 120, 62, 1);">
-                © 2022 - FamilyTree:
-                <a class="text-white" href="https://github.com/SkarpetkiZKavaj/FamilyTree">GitHub</a>
+        }
+        else
+        {
+            <div class="col-12  vh-100" style="background-color: rgba(208, 193, 172, 0.05);">
+                <div class="p-3 shadow vh-100">
+                    @RenderBody()
+                </div>
             </div>
-        </footer>
+        }
+    </div>
+</div>
+<footer style="background-color: rgba(208, 193, 172, 0.15);">
+    <div class="text-center p-3">
+        © 2022 - FamilyTree:
+        <a class="text-black" href="https://github.com/SkarpetkiZKavaj/FamilyTree">GitHub</a>
+    </div>
+</footer>
 </body>
 </html>
