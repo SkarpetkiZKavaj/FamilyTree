@@ -6,7 +6,7 @@ public class TreeVM
     
     public string OwnerId { get; set; }
 
-    public int Name { get; set; }
+    public string Name { get; set; }
 
     public ICollection<PersonVM> Members { get; set; }
 }

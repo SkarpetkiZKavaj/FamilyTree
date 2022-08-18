@@ -8,7 +8,7 @@ public class TreeDTO
     
     public string OwnerId { get; set; }
 
-    public int Name { get; set; }
+    public string Name { get; set; }
 
     public ICollection<PersonDTO> Members { get; set; }
 }

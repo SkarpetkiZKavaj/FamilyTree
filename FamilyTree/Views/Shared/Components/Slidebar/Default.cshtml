@@ -1,0 +1,17 @@
+@model List<FamilyTree.ViewModels.TreeVM>
+
+<h3 class="text-center">Trees</h3>
+
+<div class="container horizontal-scrollable">
+    <div class="row text-center">
+        <div class="col-xs-4">
+            @Html.ActionLink("Add", "Index", "Tree", null, new { @class = "btn", style = "background-color: rgba(95, 50, 0, 1); color: rgba(255, 255, 255, 1);" })
+        </div>
+        @foreach (var tree in Model)
+        {
+            <div class="col-xs-4">
+                @Html.ActionLink(tree.Name, "GetTree", "Tree", new { treeId = tree.Id }, new { @class = "text", style = "color: rgba(0, 0, 0, 1); text-decoration: none;" })
+            </div>
+        }
+    </div>
+</div>

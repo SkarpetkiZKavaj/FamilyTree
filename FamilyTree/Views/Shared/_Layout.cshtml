@@ -12,10 +12,10 @@
     <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
 </head>
-<body>
-<nav class="navbar navbar-expand-lg flex-column flex-md-row shadow" style="background-color: rgba(208, 193, 172, 0.2);">
+<body class="h-100" style="background-color: rgba(208, 193, 172, 0.15);">
+<nav class="navbar navbar-expand-lg flex-column flex-md-row shadow" style="background-color: rgba(208, 193, 172, 0.15);">
     <a class="navbar-brand px-4" href="~/Home/Index">
-        <h2>Home</h2>
+        <h2>FamilyTree</h2>
     </a>
     <div class="collapse navbar-collapse justify-content-end">
         <ul class="nav ">
@@ -37,36 +37,57 @@
         </ul>
     </div>
 </nav>
-
-<div class="container-fluid vh-100" style="background-color: rgba(208, 193, 172, 0.1);">
-    <div class="row align-items-center gx-5">
-        @if (IsSectionDefined("Sidebar"))
-        {
-            <div class="col-2 vh-100" style="background-color: rgba(208, 193, 172, 0.1);">
-                <div class="p-3 shadow vh-100">
-                    @RenderSection("Sidebar")
+<hr/>
+<section>
+    <div class="container-fluid">
+        <div class="row">
+            @if (IsSectionDefined("Sidebar") || IsSectionDefined("Slidebar"))
+            {
+                <div class="col-sm-2">
+                    <div class="p-3 shadow" style="background-color: rgba(208, 193, 172, 0.15);">
+                        @RenderSection("Sidebar", false)
+                    </div>
                 </div>
-            </div>
-            <div class="col-10 vh-100" style="background-color: rgba(208, 193, 172, 0.05);">
-                <div class="p-3 shadow vh-100">
-                    @RenderBody()
+                <div class="col-sm-10">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="p-3 shadow" style="background-color: rgba(208, 193, 172, 0.15);">
+                                @RenderSection("Slidebr", false)
+                            </div>
+                        </div>
+                    </div>
+                    <hr/>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="p-3 shadow" style="background-color: rgba(208, 193, 172, 0.15);">
+                                @RenderBody()
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        }
-        else
-        {
-            <div class="col-12  vh-100" style="background-color: rgba(208, 193, 172, 0.05);">
-                <div class="p-3 shadow vh-100">
-                    @RenderBody()
+            }
+            else
+            {
+                <div class="col-sm-12">
+                    <div class="p-3 shadow" style="background-color: rgba(208, 193, 172, 0.15);">
+                        @RenderBody()
+                    </div>
                 </div>
-            </div>
-        }
+            }
+        </div>
     </div>
-</div>
-<footer style="background-color: rgba(208, 193, 172, 0.15);">
-    <div class="text-center p-3">
-        © 2022 - FamilyTree:
-        <a class="text-black" href="https://github.com/SkarpetkiZKavaj/FamilyTree">GitHub</a>
+</section>
+<hr/>
+<footer class="footer shadow-lg" style="background-color: rgba(208, 193, 172, 0.15);">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="text-center p-3">
+                    © 2022 - FamilyTree:
+                    <a class="text-black" href="https://github.com/SkarpetkiZKavaj/FamilyTree">GitHub</a>
+                </div>
+            </div>
+        </div>
     </div>
 </footer>
 </body>
