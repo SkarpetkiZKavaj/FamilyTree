@@ -20,16 +20,22 @@ public class PersonController : Controller
 
     public PersonController(IServiceHub hub) => this.hub = hub;
 
-    public IActionResult Index() => View();
+    public IActionResult Index()
+    {
+        return View();
+    }
 
     [HttpPost]
     public IActionResult AddPerson(PersonVM person)
     {
-        DescriptionVM desc = new DescriptionVM();
-        person.Description = desc;
-        person.Description.OwnerId = User?.Claims?.FirstOrDefault(c => c.Type == "UserId")?.Value;
-        person.OwnerId = User?.Claims?.FirstOrDefault(c => c.Type == "UserId")?.Value;
+        string? ownerId = User?.Claims?.FirstOrDefault(c => c.Type == "UserId")?.Value;
 
+        if (ownerId is null)
+            return Unauthorized();
+
+        person.OwnerId = ownerId;
+        person.Description = new DescriptionVM() { OwnerId = ownerId };
+            
         var personDTO = mapper.Map<PersonVM, PersonDTO>(person);
         hub.PersonService.Add(personDTO);
         hub.Save();
@@ -37,12 +43,12 @@ public class PersonController : Controller
         return RedirectToAction("Index");
     }
 
-    [HttpPost]
+    [HttpGet]
     public IActionResult Delete(int personId)
     {
         hub.PersonService.Delete(personId);
         hub.Save();
         
-        return RedirectToAction("Index");
+        return RedirectToAction("Index", "Home");
     }
 }

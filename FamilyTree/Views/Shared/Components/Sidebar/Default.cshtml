@@ -9,13 +9,10 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-6">
-                        @Html.ActionLink( person.FirstName + " " + person.LastName, "Index", "Description", new { personId = person.Id }, new { @class = "text", style = "color: rgba(0, 0, 0, 1); text-decoration: none;" })
+                        @Html.ActionLink(person.FirstName + " " + person.LastName + ".", "Index", "Description", new { personId = person.Id }, new { @class = "btn", style = "background-color: rgba(208, 193, 172, 0); color: rgba(0, 0, 0, 1); text-decoration: none;" })
                     </div>
                     <div class="col-6">
-                        @using (Html.BeginForm("Delete", "Person", new { personId = person.Id }, FormMethod.Post))
-                        {
-                            <button type="submit" class="btn" style="background-color: rgba(140, 40, 0, 1); color: rgba(255, 255, 255, 1);">Delete</button>
-                        }
+                        @Html.ActionLink("Delete", "Delete", "Person", new { personId = person.Id }, new { @class = "btn", style = "background-color: rgba(140, 40, 0, 1); color: rgba(255, 255, 255, 1);" })
                     </div>
                 </div>
             </div>

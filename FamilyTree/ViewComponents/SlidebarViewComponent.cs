@@ -14,8 +14,11 @@ public class SlidebarViewComponent : ViewComponent
     
     private IServiceHub hub;
 
-    public SlidebarViewComponent(IServiceHub hub) => this.hub = hub;    
-    
+    public SlidebarViewComponent(IServiceHub hub)
+    {
+        this.hub = hub;
+    }
+
     public IViewComponentResult Invoke()
     {
         var trees = mapper.Map<IEnumerable<TreeDTO>, IEnumerable<TreeVM>>(hub.TreeService.Get()).ToList();

@@ -17,7 +17,10 @@ public class SidebarViewComponent : ViewComponent
     
     private IServiceHub hub;
 
-    public SidebarViewComponent(IServiceHub hub) => this.hub = hub;
+    public SidebarViewComponent(IServiceHub hub)
+    {
+        this.hub = hub;
+    }
 
     public IViewComponentResult Invoke()
     {

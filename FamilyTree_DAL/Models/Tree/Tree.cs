@@ -8,7 +8,7 @@ public class Tree
 
     public string OwnerId { get; set; }
     
-    public string Name { get; set; }
+    public string? Name { get; set; }
 
     public ICollection<Person> Members { get; set; }
 }
