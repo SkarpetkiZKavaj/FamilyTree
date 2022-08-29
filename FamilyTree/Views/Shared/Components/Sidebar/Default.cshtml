@@ -1,0 +1,23 @@
+@model List<PersonVM>
+
+<h3 class="text-center">Persons</h3>
+<hr/>
+<ul class="list-group list-group-flush bg-transparent">
+    @foreach (var person in Model)
+    {
+        <li class="list-group-item bg-transparent">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-6">
+                        @Html.ActionLink(person.FirstName + " " + person.LastName + ".", "Index", "Description", new { personId = person.Id }, new { @class = "btn", style = "background-color: rgba(208, 193, 172, 0); color: rgba(0, 0, 0, 1); text-decoration: none;" })
+                    </div>
+                    <div class="col-6">
+                        @Html.ActionLink("Delete", "Delete", "Person", new { personId = person.Id }, new { @class = "btn", style = "background-color: rgba(140, 40, 0, 1); color: rgba(255, 255, 255, 1);" })
+                    </div>
+                </div>
+            </div>
+        </li>
+    }
+    <hr/>
+    @Html.ActionLink("Add", "Index", "Person", null, new { @class = "btn", style = "background-color: rgba(95, 50, 0, 1); color: rgba(255, 255, 255, 1);" })
+</ul>

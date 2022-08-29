@@ -50,6 +50,7 @@ public class DescriptionController : Controller
         
         hub.PersonService.Update(personDTO);
         hub.Save();
+        
         return RedirectToAction("Index", new {personId});
     }
 }

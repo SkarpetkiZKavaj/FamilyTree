@@ -5,68 +5,89 @@
 
 
 <!DOCTYPE html>
-<html>
+<html lang="en" class="h-100">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
 </head>
-<body>
-<nav class="navbar navbar-expand-lg flex-column flex-md-row shadow" style="background-color: rgba(208, 193, 172, 0.2);">
-    <a class="navbar-brand px-4" href="~/Home/Index">
-        <h2>Home</h2>
-    </a>
-    <div class="collapse navbar-collapse justify-content-end">
-        <ul class="nav ">
-            @if (!SignInManager.IsSignedIn(User))
+<body class="d-flex flex-column h-100" style="background-color: rgba(247, 245, 242, 1);">
+<header>
+    <nav class="navbar navbar-expand-md fixed-top shadow" style="background-color: rgba(241, 237, 232, 1);">
+        <a class="navbar-brand px-4" href="~/Home/Index">
+            <h2>FamilyTree</h2>
+        </a>
+        <div class="collapse navbar-collapse justify-content-end">
+            <ul class="nav ">
+                @if (!SignInManager.IsSignedIn(User))
+                {
+                    <li class="nav-item">
+                        <a class="btn" href="~/Account/Register" style="background-color: rgba(95, 50, 0, 1); color: rgba(255, 255, 255, 1);">Sign up</a>
+                    </li>
+                    <li class="nav-item px-4">
+                        <a class="btn" href="~/Account/Login" style="background-color: rgba(95, 50, 0, 1); color: rgba(255, 255, 255, 1);">Log in</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item px-4">
+                        <a class="btn" href="~/Account/Logout" style="background-color: rgba(95, 50, 0, 1); color: rgba(255, 255, 255, 1);">Log out</a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </nav>
+</header>
+<main class="flex-shrink-0 mt-5">
+    <div class="container-fluid mt-5">
+        <div class="row ">
+            @if (IsSectionDefined("Sidebar") || IsSectionDefined("Slidebar"))
             {
-                <li class="nav-item">
-                    <a class="btn" href="~/Account/Register" style="background-color: rgba(95, 50, 0, 1); color: rgba(255, 255, 255, 1);">Sign up</a>
-                </li>
-                <li class="nav-item px-4">
-                    <a class="btn" href="~/Account/Login" style="background-color: rgba(95, 50, 0, 1); color: rgba(255, 255, 255, 1);">Log in</a>
-                </li>
+                <div class="col-sm-2">
+                    <div class="p-3 shadow" style="background-color: rgba(241, 237, 232, 1);">
+                        @RenderSection("Sidebar", false)
+                    </div>
+                </div>
+                <div class="col-sm-10">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="p-3 shadow" style="background-color: rgba(241, 237, 232, 1);">
+                                @RenderSection("Slidebr", false)
+                            </div>
+                        </div>
+                    </div>
+                    <hr/>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="p-3 shadow" style="background-color: rgba(241, 237, 232, 1);">
+                                @RenderBody()
+                            </div>
+                        </div>
+                    </div>
+                </div>
             }
             else
             {
-                <li class="nav-item px-4">
-                    <a class="btn" href="~/Account/Logout" style="background-color: rgba(95, 50, 0, 1); color: rgba(255, 255, 255, 1);">Log out</a>
-                </li>
+                <div class="col-sm-12">
+                    <div class="p-3 shadow" style="background-color: rgba(241, 237, 232, 1);">
+                        @RenderBody()
+                    </div>
+                </div>
             }
-        </ul>
+        </div>
     </div>
-</nav>
-
-<div class="container-fluid vh-100" style="background-color: rgba(208, 193, 172, 0.1);">
-    <div class="row align-items-center gx-5">
-        @if (IsSectionDefined("Sidebar"))
-        {
-            <div class="col-2 vh-100" style="background-color: rgba(208, 193, 172, 0.1);">
-                <div class="p-3 shadow vh-100">
-                    @RenderSection("Sidebar")
+</main>
+<footer class="footer mt-auto py-3 shadow-lg" style="background-color: rgba(241, 237, 232, 1);">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="text-center p-3">
+                    © 2022 - FamilyTree:
+                    <a class="text-black" href="https://github.com/SkarpetkiZKavaj/FamilyTree">GitHub</a>
                 </div>
             </div>
-            <div class="col-10 vh-100" style="background-color: rgba(208, 193, 172, 0.05);">
-                <div class="p-3 shadow vh-100">
-                    @RenderBody()
-                </div>
-            </div>
-        }
-        else
-        {
-            <div class="col-12  vh-100" style="background-color: rgba(208, 193, 172, 0.05);">
-                <div class="p-3 shadow vh-100">
-                    @RenderBody()
-                </div>
-            </div>
-        }
-    </div>
-</div>
-<footer style="background-color: rgba(208, 193, 172, 0.15);">
-    <div class="text-center p-3">
-        © 2022 - FamilyTree:
-        <a class="text-black" href="https://github.com/SkarpetkiZKavaj/FamilyTree">GitHub</a>
+        </div>
     </div>
 </footer>
 </body>

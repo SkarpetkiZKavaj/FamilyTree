@@ -2,7 +2,7 @@
 @using System.Formats.Asn1
 @using System.Reflection.Metadata
 @using FamilyTree_DAL.Models
-@model List<PersonVM>
+@using FamilyTree.Controllers
 
 @{
     Layout = "_Layout";
@@ -10,14 +10,12 @@
 
 @section Sidebar
 {
-  <h3 class="text-center">Trees</h3>
-  <hr/>
-  <ul class="list-group list-group-flush bg-transparent">
-      @foreach (var person in Model)
-      {
-        <li class="list-group-item bg-transparent">@person.FirstName</li>
-      }
-  </ul>
+  @await Component.InvokeAsync("Sidebar")
+}
+ 
+@section Slidebr
+{
+  @await Component.InvokeAsync("Slidebar")
 }
 
 <!DOCTYPE html>
@@ -29,46 +27,8 @@
       <title>FamilyTree</title>
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     </head>
-    <body>
-      @using (Html.BeginForm("AddPerson", "Home", FormMethod.Post))
-      {
-        <div class="mb-3">
-          <label for="firstName" class="form-label">First name</label>
-          <input type="text" class="form-control" name="FirstName">
-        </div>
-        <div class="mb-3">
-          <label for="lastName" class="form-label">Last name</label>
-          <input type="text" class="form-control" name="LastName">
-        </div>
-        <div class="mb-3">
-          <label for="age" class="form-label">Age</label>
-          <input type="text" class="form-control" name="Age">
-        </div>
-        <button type="submit" class="btn" style="background-color: rgba(95, 50, 0, 1); color: rgba(255, 255, 255, 1);">Add</button>
-      }   
-      <hr/>
-      <table class="table table-condensed table-striped table-bordered">
-            <thead><tr><th>First name</th><th>Last name</th><th>Age</th></tr></thead>
-            <tbody>
-            @foreach (var person in Model)
-            {
-              <tr>
-                <td>@person.FirstName</td>
-                <td>@person.LastName</td>
-                <td>@person.Age</td>
-                <td>
-                  <td>@Html.ActionLink("Description","Index", "Description", new {personId = person.Id},new { @class = "btn", style="background-color: rgba(95, 50, 0, 1); color: rgba(255, 255, 255, 1);"})</td>
-                </td>
-                <td>
-                  @using (Html.BeginForm("Delete", "Home",new { personId = person.Id }, FormMethod.Post))
-                  {
-                    <button type="submit" class="btn" style="background-color: rgba(140, 40, 0, 1); color: rgba(255, 255, 255, 1);">Delete</button>
-                  }
-                </td>
-              </tr>
-            }
-            </tbody>
-          </table>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
-    </body>
+<body>
+<h1 class="text-center">Home page</h1>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+</body>
 </html>

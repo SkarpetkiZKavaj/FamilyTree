@@ -1,9 +1,9 @@
 using System.Security.Claims;
 using FamilyTree.ViewModels;
 using FTEntities.IdentityModels.User;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SignalR;
 
 namespace FamilyTree.Controllers;
 
@@ -41,9 +41,9 @@ public class AccountController : Controller
     }
     
     [HttpGet]
-    public IActionResult Login(string returnUrl = null)
+    public IActionResult Login()
     {
-        return View(new LoginVM { ReturnUrl = returnUrl });
+        return View();
     }
     
     [HttpPost]
@@ -52,19 +52,13 @@ public class AccountController : Controller
         var result = await signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
         if (result.Succeeded)
         {
-            if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
-            {
-                return Redirect(model.ReturnUrl);
-            }
-            else
-            {
-                return RedirectToAction("Index", "Home");
-            }
+            return RedirectToAction("Index", "Home");
         }
         
         return View(model);
     }
     
+    [Authorize]
     [HttpGet]
     public async Task<IActionResult> Logout()
     {
