@@ -40,11 +40,35 @@
                     </div>
                 </div>
                 <div class="row justify-content-center">
+                    <hr/>
                     <div class="col-4">
-                        <hr/>
                         <button type="submit" class="btn" style="background-color: rgba(95, 50, 0, 1); color: rgba(255, 255, 255, 1);">Log in</button>
                     </div>
                 </div>
+            }
+        </div>
+    </div>
+    <div class="row justify-content-end">
+        <div class="col-2">
+            @{
+                if (!Model.ExternalLogins.Any())
+                {
+                    <div>No external logins configured</div>
+                }
+                else
+                {
+                    @using (Html.BeginForm("ExternalLogin", "Account", FormMethod.Post))
+                    {
+                        @foreach (var provider in Model.ExternalLogins)
+                        {
+                            <button type="submit" class="btn" style="background-color: rgba(95, 50, 0, 1); color: rgba(255, 255, 255, 1);"
+                                    name="provider" value="@provider.Name"
+                                    title="Login using your @provider.DisplayName account">
+                                @provider.DisplayName
+                            </button>
+                        }
+                    }
+                }
             }
         </div>
     </div>

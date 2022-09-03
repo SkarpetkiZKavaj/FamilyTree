@@ -22,7 +22,7 @@ public class IdentityContext : IdentityDbContext<User>
     {
         if (!optionsBuilder.IsConfigured)
         {
-            optionsBuilder.UseNpgsql(configuration["ConnectionString:IdentityConnection"]);
+            optionsBuilder.UseNpgsql("Server=localhost;port=5432;Database=Users;User Id=postgres;Password=postgres");
         }
     }
 }
