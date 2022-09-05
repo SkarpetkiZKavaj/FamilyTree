@@ -22,7 +22,6 @@ public class DescriptionController : Controller
 
     public DescriptionController(IServiceHub hub) => this.hub = hub;
     
-
     [HttpGet]
     public IActionResult Index(int personId)
     {
@@ -40,7 +39,10 @@ public class DescriptionController : Controller
     [HttpPost]
     public IActionResult ChangeInformation(int personId, PersonVM person)
     {
-        var personDTO = hub.PersonService.Get((p => p.Id == personId), null, "Description").FirstOrDefault();
+        if (person is null)
+            return NoContent();
+
+            var personDTO = hub.PersonService.Get((p => p.Id == personId), null, "Description").FirstOrDefault();
 
         if (personDTO is null)
             return NotFound();
