@@ -33,6 +33,7 @@ builder.Services.AddScoped<IValidator<DescriptionDTO>, DescriptionDTOValidator>(
 var app = builder.Build();
 
 app.UseRouting();
+app.UseStaticFiles();
 app.UseAuthentication();
 app.UseAuthorization();
 

@@ -9,15 +9,15 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-6">
-                        @Html.ActionLink(person.FirstName + " " + person.LastName + ".", "Index", "Description", new { personId = person.Id }, new { @class = "btn", style = "background-color: rgba(208, 193, 172, 0); color: rgba(0, 0, 0, 1); text-decoration: none;" })
+                        @Html.ActionLink(person.FirstName + " " + person.LastName + ".", "Index", "Description", new { personId = person.Id }, new { @class = "btn item-link"})
                     </div>
                     <div class="col-6">
-                        @Html.ActionLink("Delete", "Delete", "Person", new { personId = person.Id }, new { @class = "btn", style = "background-color: rgba(140, 40, 0, 1); color: rgba(255, 255, 255, 1);" })
+                        @Html.ActionLink("Delete", "Delete", "Person", new { personId = person.Id }, new { @class = "btn red-button" })
                     </div>
                 </div>
             </div>
         </li>
     }
     <hr/>
-    @Html.ActionLink("Add", "Index", "Person", null, new { @class = "btn", style = "background-color: rgba(95, 50, 0, 1); color: rgba(255, 255, 255, 1);" })
+    @Html.ActionLink("Add", "Index", "Person", null, new { @class = "btn brown-button"})
 </ul>

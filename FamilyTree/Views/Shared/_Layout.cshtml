@@ -11,10 +11,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/css/common.css"/>
 </head>
-<body class="d-flex flex-column h-100" style="background-color: rgba(247, 245, 242, 1);">
+<body class="d-flex flex-column h-100 main-background">
 <header>
-    <nav class="navbar navbar-expand-md fixed-top shadow" style="background-color: rgba(241, 237, 232, 1);">
+    <nav class="navbar navbar-expand-md fixed-top shadow window-background">
         <a class="navbar-brand px-4" href="~/Home/Index">
             <h2>FamilyTree</h2>
         </a>
@@ -23,16 +24,16 @@
                 @if (!SignInManager.IsSignedIn(User))
                 {
                     <li class="nav-item">
-                        <a class="btn" href="~/Account/Register" style="background-color: rgba(95, 50, 0, 1); color: rgba(255, 255, 255, 1);">Sign up</a>
+                        <a class="btn brown-button" href="~/Account/Register">Sign up</a>
                     </li>
                     <li class="nav-item px-4">
-                        <a class="btn" href="~/Account/Login" style="background-color: rgba(95, 50, 0, 1); color: rgba(255, 255, 255, 1);">Log in</a>
+                        <a class="btn brown-button" href="~/Account/Login">Log in</a>
                     </li>
                 }
                 else
                 {
                     <li class="nav-item px-4">
-                        <a class="btn" href="~/Account/Logout" style="background-color: rgba(95, 50, 0, 1); color: rgba(255, 255, 255, 1);">Log out</a>
+                        <a class="btn brown-button" href="~/Account/Logout">Log out</a>
                     </li>
                 }
             </ul>
@@ -52,7 +53,7 @@
                 <div class="col-sm-10">
                     <div class="row">
                         <div class="col-sm-12">
-                            <div class="p-3 shadow" style="background-color: rgba(241, 237, 232, 1);">
+                            <div class="p-3 shadow window-background">
                                 @RenderSection("Slidebr", false)
                             </div>
                         </div>
@@ -60,7 +61,7 @@
                     <hr/>
                     <div class="row">
                         <div class="col-sm-12">
-                            <div class="p-3 shadow" style="background-color: rgba(241, 237, 232, 1);">
+                            <div class="p-3 shadow window-background">
                                 @RenderBody()
                             </div>
                         </div>
@@ -70,7 +71,7 @@
             else
             {
                 <div class="col-sm-12">
-                    <div class="p-3 shadow" style="background-color: rgba(241, 237, 232, 1);">
+                    <div class="p-3 shadow window-background">
                         @RenderBody()
                     </div>
                 </div>
@@ -78,7 +79,7 @@
         </div>
     </div>
 </main>
-<footer class="footer mt-auto py-3 shadow-lg" style="background-color: rgba(241, 237, 232, 1);">
+<footer class="footer mt-auto py-3 shadow-lg window-background">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
@@ -90,5 +91,7 @@
         </div>
     </div>
 </footer>
+<script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="lib/jquery/dist/jquery-3.6.1.min.js"></script>
 </body>
 </html>
