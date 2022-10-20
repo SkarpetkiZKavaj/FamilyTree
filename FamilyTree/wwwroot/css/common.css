@@ -1,0 +1,28 @@
+.brown-button{
+    background-color: rgba(95, 50, 0, 1); 
+    color: rgba(255, 255, 255, 1);
+}
+
+.red-button{
+    background-color: rgba(140, 40, 0, 1); 
+    color: rgba(255, 255, 255, 1);
+}
+
+.main-background{
+    background-color: rgba(247, 245, 242, 1);
+}
+
+.window-background{
+    background-color: rgba(241, 237, 232, 1);
+}
+
+.item-link{
+    background-color: rgba(208, 193, 172, 0); 
+    color: rgba(0, 0, 0, 1); 
+    text-decoration: none;
+}
+
+.horizontal-slidebar{
+    overflow:auto; 
+    white-space: nowrap;
+}

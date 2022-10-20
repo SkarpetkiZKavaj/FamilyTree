@@ -1,7 +1,9 @@
 using AutoMapper;
 using FamilyTree_BAL.DTO;
 using FamilyTree_BAL.Interface;
+using FamilyTree.Helper.Validation;
 using FamilyTree.ViewModels;
+using FluentValidation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,9 +19,15 @@ public class PersonController : Controller
     }).CreateMapper();
     
     private IServiceHub hub;
+    private IValidator<PersonDTO> validator; 
 
-    public PersonController(IServiceHub hub) => this.hub = hub;
+    public PersonController(IServiceHub hub, IValidator<PersonDTO> validator)
+    {
+        this.validator = validator;
+        this.hub = hub;
+    }
 
+    [HttpGet]
     public IActionResult Index()
     {
         return View();
@@ -30,13 +38,20 @@ public class PersonController : Controller
     {
         string? ownerId = User?.Claims?.FirstOrDefault(c => c.Type == "UserId")?.Value;
 
-        if (ownerId is null)
-            return Unauthorized();
-
         person.OwnerId = ownerId;
         person.Description = new DescriptionVM() { OwnerId = ownerId };
             
         var personDTO = mapper.Map<PersonVM, PersonDTO>(person);
+
+        var validationResult = validator.Validate(personDTO);
+
+        if (!validationResult.IsValid)
+        {
+            validationResult.AddToModelState(this.ModelState);
+
+            return View("Index", person);
+        }
+        
         hub.PersonService.Add(personDTO);
         hub.Save();
         
